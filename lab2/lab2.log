@@ -1,0 +1,142 @@
+Haochen Li
+204739914
+
+1. test Locale
+
+$export LC_ALL='C'
+$locale  
+
+output: LANG=en_US.UTF-8
+LC_CTYPE="C"
+LC_NUMERIC="C"
+LC_TIME="C"
+LC_COLLATE="C"
+LC_MONETARY="C"
+LC_MESSAGES="C"
+LC_PAPER="C"
+LC_NAME="C"
+LC_ADDRESS="C"
+LC_TELEPHONE="C"
+LC_MEASUREMENT="C"
+LC_IDENTIFICATION="C"
+LC_ALL=C
+
+2. Sort the director and store in a file called words
+
+$ sort -u /usr/share/dict/words > words
+——> all the info saved in a file called words
+
+3. test tr command
+
+ $ wget http://web.cs.ucla.edu/classes/fall17/cs35L/assign/assign2.html
+—> get the text file in html
+
+a. $ tr -c 'A-Za-z' '[\n*]' < assign2.html 
+—>The command prints out the content of the file with each word in a line, which are included A-Z or a-z. Words other than A-Z or a-z are not printed out but shown as empty lines. 
+
+b. $ tr -cs 'A-Za-z' '[\n*]' < assign2.html
+—>The command prints out the content of the file with each word in a line, which are included in A-Z or a-z. But the words other than A-Z or a-z are not printed in empty lines because the -s squeeze the output. 
+
+c. $ tr -cs 'A-Za-z' '[\n*]' < assign2.html | sort
+—> The output shows that each words are sorted and print out in different lines at ASCII standard. There is a lot of repetition. 
+
+d. $ tr -cs 'A-Za-z' '[\n*]' < assign2.html | sort -u
+—> The output show that the file is sorted and print out in different lines but the repetitive words were not shown. 
+
+e. $ tr -cs 'A-Za-z' '[\n*]' | sort -u | comm - words < assign2.html
+—> The output shows three column 
+
+f. $ tr -cs 'A-Za-z' '[\n*]' | sort -u | comm -23 - words < assign2.html
+—> The output shows three column that the first column shows the words only unique in assign2.html and not appear in words. The second column shows the words only appeared in words but not in assign2.html. The third column shows the words appear both in assign2.html and words. 
+
+4. download the english to hawaiian table
+$ wget http://mauimapp.com/moolelo/hwnwdseng.htm
+
+5. buildwords script: 
+   #!/bin/sh
+a. grep -o -P '(?<=<td>).*(?=</td>)' |
+   grab every string between <td> and </td>
+b. sed -n 'n;p' |
+   delete the odd line which contain English and keep the even line which contain        Hawaiian
+c. sed 's/<td>//g’ |
+   replace all the <td> with empty string which means delete all the <td>
+d. sed ’s/<\/td>//g’ |
+   replace all the </td> with empty string which means delete all the </td>
+e. sed ’s/<u>//g’ |
+   replace all the <u> with empty string which means delete all the <u>
+f. sed sed ’s/<\/u>//g' |
+   replace all the </u> with empty string which means delete all the </u>
+g. sed ’s/[, ]/\n/g’ | 
+   replace all the ‘,’ with a new line
+h. sed 's/ /\n/g' |
+   replace space with empty lines
+i. sed s/\`/‘/g |
+   change all the ` to ‘
+j. tr '[:upper:]' '[:lower:]' 
+   change all the upper case to lower case
+k. sed  "/[^p^k^'^m^n^w^l^h^a^e^i^o^u]/d" 
+   delete all the letters except “p k ' m n w l h a e i o u”
+l. tr -s '\n' '\n'|
+   delete empty lines
+m. sort -u
+   sort the words and delete the repetition to make each words unique
+
+
+   
+6. Check how many words that are misspelled in English
+$ cat assign2.html | tr -cs 'A-Za-z' '[\n*]' | tr '[:upper:]' '[:lower:]' 
+| sort -u | comm -23 - words > test1
+$ wc -w test1
+
+It shows that there are 38 words. 
+
+7. Check how many words that are misspelled in Hawaiian 
+$ cat assign2.html |tr -cs "pk\'mnwlhaeiou" '[\n*]' |tr '[:upper:]' '[:lower:]' |sort -u | comm -23 - hwords > test2
+$ wc -w test2
+
+It shows that there are 199 miss spelled Hawaiian. 
+ 
+8. Words that are misspelled in English but not Hawaiian
+$ cat test1 |tr -cs "pk\'mnwlhaeiou" '[\n*]' |sort -u | comm -12 - hwords > test3
+$ cat test3
+There are words misspelled English but not Hawaiian.
+Example words misspelled English but not Hawaiian:
+halau
+lau
+wiki
+
+9. $ cat test2 | tr -cs 'A-Za-z' '[\n*]' |sort -u | comm -12 - words > test4
+There are words misspelled Hawaiian but not English
+Example: a
+ail
+ain
+ake
+al
+ale
+alen
+all
+amine
+amp
+ample
+an
+aph
+aul
+awk
+ea
+ee
+el
+em
+emp
+en
+ep
+epa
+h
+ha
+han
+
+
+
+
+
+
+   

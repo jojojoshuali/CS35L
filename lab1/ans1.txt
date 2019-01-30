@@ -1,0 +1,110 @@
+Haochen Li
+204739914
+
+Lab
+
+1. “m a n m a n Enter” print all the command. “m a n -K “keyword” Enter” to search a specific string in man page 
+
+2.  keystroke: whereis cp  
+               whereis wp
+  cp is in /usr/bin/cp
+  wp is in /usr/bin/wc
+
+3. keystroke: cd /usr/bin 
+              find name ?
+              man X
+              man w 
+   X:  portable, network-transparent window system
+   w:  show who is logged on and what they are doing.
+
+4. keystrokes: cd /usr/bin
+   ls -l 
+The file it actually execute is /etc/alternatives/emacs
+
+5. Keystrokes: man chmod
+   g+s set user group ID on execution 
+   o+x other users in the file groups can execute/search only if  the file is a directory or already has execute permission for some user
+
+6. keystrokes: find -mtime -21
+
+7. keystrokes: find -mtime -21 -type d
+.
+./nsdefault
+./Desktop
+./Desktop/hw1
+./Documents
+./Downloads
+./good
+./.cache
+./.cache/abrt
+./.config
+./.config/abrt
+./perl5
+./.ssh
+./.emacs.d
+./.emacs.d/auto-save-list
+
+
+8. keystrokes: cd /usr/bin/
+   find -type l
+
+   359 files. 
+
+9. keystrokes: cd /usr/lib  
+   ls -lrta
+
+   oldest file: libgpg-error.so.0.10.0
+
+10.  keystrokes: man locale
+     LC_* environment variables
+    
+
+11. keystroke: C-h a s o r t Enter
+
+Buffer-menu-sort              M-x ... RET
+   Sort Tabulated List entries by the column at point.
+sort-columns                  M-x ... RET
+   Sort lines in region alphabetically by a certain range of columns.
+sort-fields                   M-x ... RET
+   Sort lines in region lexicographically by the ARGth field of each
+   line.
+sort-lines                    M-x ... RET
+   Sort lines in region alphabetically; argument means descending
+   order.
+sort-numeric-fields           M-x ... RET
+   Sort lines in region numerically by the ARGth field of each line.
+sort-pages                    M-x ... RET
+   Sort pages in region alphabetically; argument means descending
+   order.
+sort-paragraphs               M-x ... RET
+   Sort paragraphs in region alphabetically; argument means descending
+   order.
+sort-regexp-fields            M-x ... RET
+   Sort the text in the region region lexicographically.
+tabulated-list-col-sort       M-x ... RET
+   Sort Tabulated List entries by the column of the mouse click E.
+tabulated-list-sort           M-x ... RET
+   Sort Tabulated List entries by the column at point.
+
+
+12. keystrokes: C-h b C-x o C-s C - M - a
+C-M-a           beginning-of-defun
+C-M-b           backward-sexp
+C-M-c           exit-recursive-edit
+C-M-d           down-list
+C-M-e           end-of-defun
+C-M-f           forward-sexp
+C-M-h           mark-defun
+
+13. keystrokes: M-< C-s C - g 
+C-g: Signal a `quit' condition.
+During execution of Lisp code, this character causes a quit directly.
+At top-level, as an editor command, this simply beeps.
+ 
+14. keystrokes: C-x 0 C-h f C-s y a n k
+yank:yank is an interactive compiled Lisp function in `simple.el'.
+     Reinsert ("paste") the last stretch of killed text.
+ 
+      
+15. keystrokes: C-h f dired C-x d 
+ls does not have complete memory. “ls” does not show “..” and “.”. But dired show “.” and “..”.

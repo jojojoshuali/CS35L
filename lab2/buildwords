@@ -1,0 +1,15 @@
+#!/bin/sh
+
+grep -o -P '(?<=<td>).*(?=</td>)' |
+sed -n 'n;p' |
+sed 's/<td>//g'|
+sed 's/<\/td>//g'|
+sed 's/<u>//g'|
+sed 's/<\/u>//g'|
+sed 's/[, ]/\n/g'|
+sed 's/ /\n/g' |
+sed s/\`/\'/g |
+tr '[:upper:]' '[:lower:]' |
+sed  "/[^p^k^'^m^n^w^l^h^a^e^i^o^u]/d" |
+tr -s '\n' '\n'|
+sort -u 
